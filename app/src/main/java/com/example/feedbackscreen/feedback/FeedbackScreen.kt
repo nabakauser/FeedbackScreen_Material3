@@ -502,8 +502,7 @@ fun AttachFiles(
 
     var imageUri by remember { mutableStateOf<Uri>(Uri.EMPTY) }
 
-    val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
             if (uri != null) {
                 imageUri = uri
                 setImage(imageUri)
@@ -516,8 +515,7 @@ fun AttachFiles(
             .padding(15.dp)
             .background(Color.White)
     ) {
-        val permissions =
-            if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.TIRAMISU) {
+        val permissions = if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
             } else {
                 arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
